@@ -6,7 +6,7 @@ display color-coded status of stuff with LED pixels.
 
 ## JSON Configuration
 
-See the [example below](#example) and consult this description if questions arise.
+See the [example below](#example) and consult this description if questions arise. The example has two sections, the first is the most minimal, the other is the most verbose config.
 
 - **`colors`**: Object. Keys are names of colors to be used in rest of config, values are valid `CSS` color strings (names, hex, hsl, …).
 - **`sections`**: Array of Objects with keys:
@@ -28,9 +28,9 @@ Expectations: can be in one of the following forms
 - simple value (number, string): must be exactly equal to compared value
 - hash of "comparators" from [the `ruler` module][`ruler`] and the value to compare.
 
-automatic assertions (no need to add those):
+<!-- automatic assertions (no need to add those):
 - `{ "status": { truthy: "" } }`
-- `{ "err": { falsy: "" } }`
+- `{ "err": { falsy: "" } }` -->
 
 ### Example 
 

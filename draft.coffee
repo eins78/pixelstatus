@@ -4,8 +4,8 @@ LIMIT=1
 
 fs= require('fs')
 async= require('async')
-log= require('./lib/logger.js')
 u= require('./lib/util')
+log= require('./lib/logger')
 runner= require('./lib/runners')
 expectator= require('./lib/expectator')
 
@@ -19,6 +19,7 @@ throw 'no config!' unless config?
     - check config: json-schema, overlapping ranges
     - build LED colors from assertion
     - run command with `child_process.spawn`
+    - task.always - color
 ###
 
 # lib
@@ -26,7 +27,9 @@ buildTask= (task) ->
   type = switch
     when task.request? then 'request'
     when task.command? then 'command'
+    # when task.always? then 'dummy'
     else throw "task #{task?.id}: one of `command` or `request` required!"
+  # TODO: allow object. now: {request:'foo'}, new: {request:{get:'foo'}}
   task.check = { string: task[type] }
   delete task[type]
   task.check.type = type
