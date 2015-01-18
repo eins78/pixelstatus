@@ -1,0 +1,2 @@
+DEFAULT:
+	npm run coffee

@@ -4,7 +4,8 @@
   "description": "openpixelcontrol client for status displays",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "coffee": "coffee -c lib/**/*.coffee"
   },
   "repository": {
     "type": "git",
@@ -22,4 +23,7 @@
     "url": "https://github.com/eins78/statuspixel/issues"
   },
   "homepage": "https://github.com/eins78/statuspixel"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.8.0"
 }
