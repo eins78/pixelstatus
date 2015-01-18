@@ -1,6 +1,6 @@
 #!/usr/bin/env coffee
 
-LIMIT=1
+LIMIT=32
 
 fs= require('fs')
 async= require('async')
