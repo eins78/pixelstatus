@@ -16,7 +16,7 @@ See the [example below](#example) and consult this description if questions aris
     - one of:
         - `command`: run a shell command
         - `request`: make a HTTP request
-    - `must`: hash of assertion(s) on (at least one of) the following values (see below for possible assertions):
+    - `expect`: hash of expectations on (at least one of) the following values (see below for possible expectations):
         - `status`: exit status of `command`, or http status of `request`
         - `output`: `stdout` of `command`, or `res` of `request`
         - `error`: `stderr` of `command`, or `err` of `request`
@@ -24,9 +24,9 @@ See the [example below](#example) and consult this description if questions aris
 - `ok`: if `assert` was true, set section to this color
 - `fail`: if `assert` was false, set section to this color
 
-assertion: can be in one of the following forms
+Expectations: can be in one of the following forms
 - simple value (number, string): must be exactly equal to compared value
-- hash of "expectations", which are just names of [methods from the `must` module][`must`] and the value to compare.
+- hash of "comparators" from [the `ruler` module][`ruler`] and the value to compare.
 
 automatic assertions (no need to add those):
 - `{ "status": { truthy: "" } }`
@@ -47,7 +47,7 @@ automatic assertions (no need to add those):
       "description": "ping npmjs.com",
       "start": 0,
       "command": "ping -W 1 -c 1 npmjs.com",
-      "must": {
+      "expect": {
         "status": 0
       },
       "ok": "green",
@@ -58,13 +58,13 @@ automatic assertions (no need to add those):
       "description": "HTTP GET npmjs.com",
       "start": 30,
       "request": "http://npmjs.com",
-      "must": {
+      "expect": {
         "status": {
-          "least": 200,
-          "below": 300
+          "gte": 200,
+          "lt": 300
         },
         "output": {
-          "include": "package manager"
+          "contains": "package manager"
         }
       },
       "ok": "green",
@@ -76,3 +76,4 @@ automatic assertions (no need to add those):
 
 
 [`must`]: <https://github.com/moll/js-must/blob/master/doc/API.md>
+[`ruler`]: <https://www.npmjs.com/package/ruler>

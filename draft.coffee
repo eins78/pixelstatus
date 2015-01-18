@@ -4,9 +4,9 @@ LIMIT=1
 
 fs= require('fs')
 async= require('async')
-expect= require('ruler')
 log= require('./lib/logger.js')
 runner= require('./lib/runners')
+expectator= require('./lib/expectator')
 
 configFile=process.argv[2]
 throw 'no config file!' unless configFile?
@@ -39,22 +39,8 @@ runTask= (task, callback) ->
     if err?
       log.error('check runner error!', task)
       return callback err
-    
-    async.each Object.keys(task.must), (target)->
-      async.each Object.keys(task.must[target]), (expectation)->
-        actual= res[target]
-        expected= task.must[target][expectation]
-        comparator = expect().rule(target)[expectation](expected)
-        unless 'function' == typeof comparator.test
-          throw 'comparator not found!'
-        ok= comparator.test(res)
-        if ok
-          log.info "OK: '#{target}' #{expectation} #{expected}:", ok
-        else
-          log.warn "NOT OK: '#{target}' #{expectation} #{expected}:", ok
-          log.verbose actual
-        callback null
-    
+    expectator(task, res, callback)
+
 
 # build tasks
 tasks= config?.sections
