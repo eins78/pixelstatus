@@ -1,0 +1,6 @@
+[submodule "vendor/openpixelcontrol"]
+	path = vendor/openpixelcontrol
+	url = https://github.com/zestyping/openpixelcontrol.git
+[submodule "vendor/fadecandy"]
+	path = vendor/fadecandy
+	url = https://github.com/scanlime/fadecandy.git
