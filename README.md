@@ -74,6 +74,18 @@ Expectations: can be in one of the following forms
 }
 ```
 
+## CLI
+
+`./draft.coffee examples/config.json -vv`
+
+### config
+
+First argument must be the path to a [config file](#json-configuation).
+
+### loglevel
+
+Set console log level by appending one or more `-v`'s. `-v` is `info`, `-vv` is `verbose`, `-vvv` is `debug`.
+
 
 [`must`]: <https://github.com/moll/js-must/blob/master/doc/API.md>
 [`ruler`]: <https://www.npmjs.com/package/ruler>
