@@ -10,11 +10,7 @@ log= require('./lib/logger')
 buildTask= require('./lib/buildTask')
 taskRunner= require('./lib/taskRunner')
 expectResult= require('./lib/expectator')
-
-configFile=process.argv[2]
-throw 'no config file!' unless configFile?
-config= JSON.parse(fs.readFileSync configFile)
-throw 'no config!' unless config?
+reactToResult= require('./lib/reactor')
 
 ###
   TODO:
@@ -24,22 +20,15 @@ throw 'no config!' unless config?
     - task.always - color
 ###
 
-# lib
-reactToResult= (res, callback) ->
-  f= require('lodash')
-  task= this
-  log.debug('results:', task?.id, res)
-  
-  state= (if f.reduce(f.flatten(res)) then 'ok' else 'fail')
-  log.verbose('state:', task?.id, state)
-  wanted= task[state]
-  log.info wanted, state
-  
-  callback null, state
+# config
+configFile=process.argv[2]
+throw 'no config file!' unless configFile?
+config= JSON.parse(fs.readFileSync configFile)
+throw 'no config!' unless config?
+tasks= config?.sections
+throw 'config: no tasks!' unless tasks?
 
 # kickoff
-tasks= config?.sections
-callback 'config: no tasks!' unless tasks?
 tasks.map buildTask.bind(taskRunner.runners)
 
 log.info "running #{tasks.length} #{u.plural('check', tasks)}…"
