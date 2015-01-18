@@ -1,4 +1,4 @@
-pixel= require('./lib/pixel')
+pixel= require('lib/pixel')
 pixel.connect { strips: [4*60] }, (err, client)->
   WAIT=10000
   strip=0

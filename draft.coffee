@@ -4,13 +4,13 @@ LIMIT=32
 
 fs= require('fs')
 async= require('async')
-u= require('./lib/util')
-log= require('./lib/logger')
+u= require('lib/util')
+log= require('lib/logger')
 
-buildTask= require('./lib/buildTask')
-taskRunner= require('./lib/taskRunner')
-expectResult= require('./lib/expectator')
-reactToResult= require('./lib/reactor')
+buildTask= require('lib/buildTask')
+taskRunner= require('lib/taskRunner')
+expectResult= require('lib/expectator')
+reactToResult= require('lib/reactor')
 
 ###
   TODO:
