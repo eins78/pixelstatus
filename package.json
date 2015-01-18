@@ -30,7 +30,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "lodash": "^2.4.1",
-    "open-pixel-control": "^0.1.2",
+    "open-pixel-control": "https://github.com/eins78/node-open-pixel-control/tarball/master",
     "request": "^2.51.0",
     "ruler": "^1.0.0",
     "winston": "^0.8.3"
