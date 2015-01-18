@@ -22,8 +22,12 @@
   "bugs": {
     "url": "https://github.com/eins78/statuspixel/issues"
   },
-  "homepage": "https://github.com/eins78/statuspixel"
+  "homepage": "https://github.com/eins78/statuspixel",
+  "dependencies": {
+    "async": "^0.9.0",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0"
+  }
 }
