@@ -30,6 +30,7 @@
   "homepage": "https://github.com/eins78/statuspixel",
   "dependencies": {
     "async": "^0.9.0",
+    "colour.js": "^1.5.2",
     "lodash": "^2.4.1",
     "open-pixel-control": "https://github.com/eins78/node-open-pixel-control/tarball/master",
     "request": "^2.51.0",
