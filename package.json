@@ -1,15 +1,16 @@
 {
   "name": "statuspixel",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "openpixelcontrol client for status displays",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run git && npm run coffee",
-    "demo": "npm run build && npm run simulator",
+    "demo": "npm run build && npm run simulator & DEMO=$(sleep 3 && npm run pixeltest)",
     "git": "git submodule update --init",
     "coffee": "find */* -name '*.coffee' -print0 | xargs -0 coffee -c",
-    "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server layouts/freespace.json"
+    "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/4-box-layout.json",
+    "pixeltest": "coffee ./pixeltest.coffee"
   },
   "repository": {
     "type": "git",

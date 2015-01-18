@@ -4,6 +4,20 @@
 
 display color-coded status of stuff with LED pixels.
 
+## Demo
+
+OpenGL Simulator:
+
+```shell
+git clone https://github.com/eins78/statuspixel
+cd statuspixel
+npm install
+npm run demo
+```
+
+![GIF of demo](https://cloud.githubusercontent.com/assets/134942/5794524/d8d94c6e-9f71-11e4-805e-effd4e89590f.gif)
+
+
 ## JSON Configuration
 
 See the [example below](#example) and consult this description if questions arise. The example has two sections, the first is the most minimal, the other is the most verbose config.
@@ -87,7 +101,24 @@ First argument must be the path to a [config file](#json-configuation).
 
 ### loglevel
 
-Set console log level by appending one or more `-v`'s. `-v` is `info`, `-vv` is `verbose`, `-vvv` is `debug`.
+Set console log level by appending one or more `-v`'s.
+`-v` is 'info', `-vv` is 'verbose', `-vvv` is 'debug'.
+
+
+## Credits
+
+The whole project uses lots of great free/open modules and projects:
+
+- <https://github.com/scanlime/fadecandy>
+- <http://openpixelcontrol.org>
+- <https://www.npmjs.com/package/open-pixel-control>
+- <https://www.npmjs.com/package/request>
+- <https://www.npmjs.com/package/ruler>
+- <https://www.npmjs.com/package/async>
+- <https://lodash.com>
+- <https://www.npmjs.com/package/must>
+
+It is written in [CoffeScript](http://coffeescript.org).
 
 
 [`must`]: <https://github.com/moll/js-must/blob/master/doc/API.md>

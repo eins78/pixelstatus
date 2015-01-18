@@ -3,8 +3,8 @@ log = require('./logger')
 
 module.exports = pixel=
   connect: (config, callback)->
-    
-    config= if config?.length then config else { strips: [60] }
+    unless config?.strips?.length
+      throw 'pixels: need config.strips!'
 
     client = new opc
       address: '127.0.0.1'
