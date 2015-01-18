@@ -1,7 +1,7 @@
 log= require('./logger')
 runByType= require('./runners')
 
-module.exports = taskRunner= (callback) ->
+taskRunner= (callback) ->
   task= this
   return callback 'no task!' unless task?
   log.info "running: '#{task.id}', type='#{task.check.type}'"
@@ -11,3 +11,7 @@ module.exports = taskRunner= (callback) ->
     if err?
       log.error('check runner error!', task)
     callback(err, res)
+
+taskRunner.runners = Object.keys(runByType)
+
+module.exports = taskRunner

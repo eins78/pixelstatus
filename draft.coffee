@@ -6,6 +6,8 @@ fs= require('fs')
 async= require('async')
 u= require('./lib/util')
 log= require('./lib/logger')
+
+buildTask= require('./lib/buildTask')
 taskRunner= require('./lib/taskRunner')
 expectResult= require('./lib/expectator')
 
@@ -23,18 +25,6 @@ throw 'no config!' unless config?
 ###
 
 # lib
-buildTask= (task) ->
-  type = switch
-    when task.request? then 'request'
-    when task.command? then 'command'
-    # when task.always? then 'dummy'
-    else throw "task #{task?.id}: one of `command` or `request` required!"
-  # TODO: allow object. now: {request:'foo'}, new: {request:{get:'foo'}}
-  task.check = { string: task[type] }
-  delete task[type]
-  task.check.type = type
-  task
-
 reactToResult= (res, callback) ->
   f= require('lodash')
   task= this
@@ -44,18 +34,16 @@ reactToResult= (res, callback) ->
   log.verbose('state:', task?.id, state)
   wanted= task[state]
   log.info wanted, state
+  
+  callback null, state
 
-  callback null
-
-# build tasks
+# kickoff
 tasks= config?.sections
-throw 'config: no tasks!' unless tasks?
-tasks = tasks.map buildTask
+callback 'config: no tasks!' unless tasks?
+tasks.map buildTask.bind(taskRunner.runners)
 
 log.info "running #{tasks.length} #{u.plural('check', tasks)}…"
-
-# run
-do run= ()->
+do workflow= (tasks)->
   # run each task async:
   async.mapLimit tasks, LIMIT, (task, callback)->
       # task async workflow:

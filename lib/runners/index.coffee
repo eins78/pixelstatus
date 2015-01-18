@@ -1,6 +1,8 @@
 module.exports = runner= {
   request: (check, callback) ->
-    require('request')(check.string, (err, res, body)->
+    request= require('request')
+    
+    request(check.data, (err, res, body)->
       res= {
         error: err
         output: body
