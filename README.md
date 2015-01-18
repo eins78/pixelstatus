@@ -4,9 +4,9 @@
 
 display color-coded status of stuff with LED pixels.
 
-## Configuration
+## JSON Configuration
 
-See the JSON example and consult this description if questions arise.
+See the [example below](#example) and consult this description if questions arise.
 
 - **`colors`**: Object. Keys are names of colors to be used in rest of config, values are valid `CSS` color strings (names, hex, hsl, …).
 - **`sections`**: Array of Objects with keys:
@@ -26,7 +26,13 @@ See the JSON example and consult this description if questions arise.
 
 assertion: can be in one of the following forms
 - simple value (number, string): must be exactly equal to compared value
-- hash of "expectations", which are just names of [methods from the `must` module][] and the value to compare.
+- hash of "expectations", which are just names of [methods from the `must` module][`must`] and the value to compare.
+
+automatic assertions (no need to add those):
+- `{ "status": { truthy: "" } }`
+- `{ "err": { falsy: "" } }`
+
+### Example 
 
 ```json
 {
