@@ -13,7 +13,7 @@ See the [example below](#example) and consult this description if questions aris
     - `id`: unique short name of section (word-characters allowed)
     - `description`: optional description of the section
     - `start`: the first pixel which belongs to the section, it will go to the end or one pixel before the next section
-    - one of:
+    - a key for one of the runners, like:
         - `command`: run a shell command
         - `request`: make a HTTP request
     - `expect`: hash of expectations on (at least one of) the following values (see below for possible expectations):
@@ -24,9 +24,49 @@ See the [example below](#example) and consult this description if questions aris
 - `ok`: if `assert` was true, set section to this color
 - `fail`: if `assert` was false, set section to this color
 
-Expectations: can be in one of the following forms
+
+### Runners
+
+#### `request`
+
+Make a HTTP request [powered by the request module][`request`].
+
+See API there, short synopsis below.
+
+1. Setting it to an URL string makes a `GET` request to this URL.
+
+    ```json
+    {
+      "request": "http://example.com"
+    }
+    ```
+
+2. Setting it to an hash enables all the bells and whistles:
+
+    ```json
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://example.com",
+        "qs": { "query": "foobar" },
+        "auth": {
+          "user": "username",
+          "pass": "password",
+          "sendImmediately": false
+        },
+        "headers": {
+          "User-Agent": "statuspixel"
+        }
+      }
+    }
+    ```
+
+### Expectations
+
+Can be in one of the following forms
 - simple value (number, string): must be exactly equal to compared value
 - hash of "comparators" from [the `ruler` module][`ruler`] and the value to compare.
+
 
 <!-- automatic assertions (no need to add those):
 - `{ "status": { truthy: "" } }`
@@ -34,45 +74,8 @@ Expectations: can be in one of the following forms
 
 ### Example 
 
-```json
-{
-  "colors": {
-    "green": "green",
-    "red": "red",
-    "white": "#ccc"
-  },
-  "sections": [
-    {
-      "id": "ping_npm",
-      "description": "ping npmjs.com",
-      "start": 0,
-      "command": "ping -W 1 -c 1 npmjs.com",
-      "expect": {
-        "status": 0
-      },
-      "ok": "green",
-      "fail": "red"
-    },
-    {
-      "id": "get_npm",
-      "description": "HTTP GET npmjs.com",
-      "start": 30,
-      "request": "http://npmjs.com",
-      "expect": {
-        "status": {
-          "gte": 200,
-          "lt": 300
-        },
-        "output": {
-          "contains": "package manager"
-        }
-      },
-      "ok": "green",
-      "fail": "red"
-    }
-  ]
-}
-```
+[see here](https://github.com/eins78/statuspixel/blob/master/examples/config.json)
+
 
 ## CLI
 
@@ -89,3 +92,4 @@ Set console log level by appending one or more `-v`'s. `-v` is `info`, `-vv` is 
 
 [`must`]: <https://github.com/moll/js-must/blob/master/doc/API.md>
 [`ruler`]: <https://www.npmjs.com/package/ruler>
+[`request`]: <https://www.npmjs.com/package/request>

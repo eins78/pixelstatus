@@ -1,0 +1,54 @@
+{
+  "colors": {
+    "green": "green",
+    "red": "red",
+    "white": "#ccc"
+  },
+  "pixels": [
+    ["localhost:7890", [0,64]]
+  ],
+  "sections": [
+    {
+      "id": "get_npm",
+      "description": "HTTP GET npmjs.com",
+      "start": 1,
+      "request": "http://npmjs.com",
+      "expect": {
+        "status": {
+          "gte": 200,
+          "lt": 300
+        },
+        "output": {
+          "contains": "package manager"
+        }
+      },
+      "ok": "green",
+      "fail": "red"
+    },
+    {
+      "id": "get_npm_status",
+      "description": "HTTP GET npmjs.com",
+      "start": 33,
+      "request": {
+        "method": "GET",
+        "url": "http://status.npmjs.org",
+        "qs": { "query": "foobar" },
+        "auth": {
+          "user": "username",
+          "pass": "password",
+          "sendImmediately": false
+        },
+        "headers": {
+          "User-Agent": "statuspixel"
+        }
+      },
+      "expect": {
+        "output": {
+          "contains": "All Systems Operational"
+        }
+      },
+      "ok": "green",
+      "fail": "red"
+    }
+  ]
+}
