@@ -6,8 +6,8 @@ fs= require('fs')
 async= require('async')
 u= require('./lib/util')
 log= require('./lib/logger')
-runner= require('./lib/runners')
-expectator= require('./lib/expectator')
+taskRunner= require('./lib/taskRunner')
+expectResult= require('./lib/expectator')
 
 configFile=process.argv[2]
 throw 'no config file!' unless configFile?
@@ -35,16 +35,17 @@ buildTask= (task) ->
   task.check.type = type
   task
 
-runTask= (task, callback) ->
-  return callback 'no task!' unless task?
-  log.info "running: '#{task.id}', type='#{task.check.type}'"
-  log.verbose task
-  runner[task.check.type] task.check, (err, res)->
-    if err?
-      log.error('check runner error!', task)
-      return callback err
-    expectator(task, res, callback)
+reactToResult= (res, callback) ->
+  f= require('lodash')
+  task= this
+  log.debug('results:', task?.id, res)
+  
+  state= (if f.reduce(f.flatten(res)) then 'ok' else 'fail')
+  log.verbose('state:', task?.id, state)
+  wanted= task[state]
+  log.info wanted, state
 
+  callback null
 
 # build tasks
 tasks= config?.sections
@@ -55,6 +56,13 @@ log.info "running #{tasks.length} #{u.plural('check', tasks)}…"
 
 # run
 do run= ()->
-  async.mapLimit tasks, LIMIT, runTask, (err)->
+  # run each task async:
+  async.mapLimit tasks, LIMIT, (task, callback)->
+      # task async workflow:
+      # - each step has this=task and callback(err, res)
+      # - all steps gets `res` from step before as first arg
+      workflow= [taskRunner, expectResult, reactToResult]
+      async.waterfall(workflow.map((step)->step.bind(task)), callback)
+  , (err)->
     return log.error 'FIN: err', err if err?
     log.info 'FIN'
