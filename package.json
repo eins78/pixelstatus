@@ -1,0 +1,25 @@
+{
+  "name": "statuspixel",
+  "version": "1.0.0",
+  "description": "openpixelcontrol client for status displays",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eins78/statuspixel"
+  },
+  "keywords": [
+    "openpixelcontrol",
+    "opc",
+    "neopixel",
+    "fadecandy"
+  ],
+  "author": "Max F. Albrecht <1@178.is>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eins78/statuspixel/issues"
+  },
+  "homepage": "https://github.com/eins78/statuspixel"
+}
