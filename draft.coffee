@@ -4,41 +4,67 @@ LIMIT=1
 
 fs= require('fs')
 async= require('async')
+expect= require('ruler')
+log= require('./lib/logger.js')
 runner= require('./lib/runners')
 
-config= JSON.parse(fs.readFileSync(process.argv[2]))
+configFile=process.argv[2]
+throw 'no config file!' unless configFile?
+config= JSON.parse(fs.readFileSync configFile)
 throw 'no config!' unless config?
 
 ###
   TODO:
     - check config: json-schema, overlapping ranges
-    - run request with `request`
-    - check assertions
     - build LED colors from assertion
     - run command with `child_process.spawn`
 ###
 
 # lib
-buildTask= (task, callback) ->
+buildTask= (task) ->
   type = switch
     when task.request? then 'request'
     when task.command? then 'command'
-    else throw "task #{task?.id}: `command` or `request` is required!"
+    else throw "task #{task?.id}: one of `command` or `request` required!"
   task.check = { string: task[type] }
   delete task[type]
   task.check.type = type
-  callback(task)
+  task
 
 runTask= (task, callback) ->
-  throw 'no task!' unless task?
-  console.log "running: '#{task.id}', type='#{task.check.type}'"
-  runner[task.check.type] task.check, callback
+  return callback 'no task!' unless task?
+  log.info "running: '#{task.id}', type='#{task.check.type}'"
+  log.verbose task
+  runner[task.check.type] task.check, (err, res)->
+    if err?
+      log.error('check runner error!', task)
+      return callback err
+    
+    async.each Object.keys(task.must), (target)->
+      async.each Object.keys(task.must[target]), (expectation)->
+        actual= res[target]
+        expected= task.must[target][expectation]
+        comparator = expect().rule(target)[expectation](expected)
+        unless 'function' == typeof comparator.test
+          throw 'comparator not found!'
+        ok= comparator.test(res)
+        if ok
+          log.info "OK: '#{target}' #{expectation} #{expected}:", ok
+        else
+          log.warn "NOT OK: '#{target}' #{expectation} #{expected}:", ok
+          log.verbose actual
+        callback null
+    
 
-# run
+# build tasks
 tasks= config?.sections
 throw 'config: no tasks!' unless tasks?
+tasks = tasks.map buildTask
 
-async.mapLimit tasks, LIMIT, async.seq(buildTask, runTask),
-  (err)->
-    return console.error 'FIN: err', err if err?
-    console.log 'FIN'
+log.info "running #{tasks.length} checks…"
+
+# run
+do run= ()->
+  async.mapLimit tasks, LIMIT, runTask, (err)->
+    return log.error 'FIN: err', err if err?
+    log.info 'FIN'

@@ -1,2 +1,2 @@
 DEFAULT:
-	npm run coffee
+	npm run build

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "coffee": "coffee -c lib/**/*.coffee"
+    "build": "npm run coffee",
+    "coffee": "find */* -name '*.coffee' -print0 | xargs -0 coffee -c"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,10 @@
   "homepage": "https://github.com/eins78/statuspixel",
   "dependencies": {
     "async": "^0.9.0",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "request": "^2.51.0",
+    "ruler": "^1.0.0",
+    "winston": "^0.8.3"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0"
