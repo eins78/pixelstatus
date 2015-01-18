@@ -5,6 +5,7 @@ LIMIT=1
 fs= require('fs')
 async= require('async')
 log= require('./lib/logger.js')
+u= require('./lib/util')
 runner= require('./lib/runners')
 expectator= require('./lib/expectator')
 
@@ -47,7 +48,7 @@ tasks= config?.sections
 throw 'config: no tasks!' unless tasks?
 tasks = tasks.map buildTask
 
-log.info "running #{tasks.length} checks…"
+log.info "running #{tasks.length} #{u.plural('check', tasks)}…"
 
 # run
 do run= ()->
