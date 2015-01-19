@@ -1,6 +1,6 @@
 pixel= require('lib/pixel')
 pixel.connect { strips: [4*60] }, (err, client)->
-  WAIT=10000
+  WAIT=1
   strip=0
   length= (client?.strips[strip]?.length)
   
@@ -17,5 +17,7 @@ pixel.connect { strips: [4*60] }, (err, client)->
   
   setTimeout ->
     color_snake [255, 255, 255], 100, ->
-      color_snake [0, 0, 0], 100
+      color_snake [0, 0, 0], 100, ->
+        console.log 'bye!'
+        do client.disconnect
   , WAIT
