@@ -2,7 +2,6 @@
 
 LIMIT=32
 
-fs= require('fs')
 async= require('async')
 u= require('lib/util')
 log= require('lib/logger')
@@ -21,16 +20,11 @@ reactToResult= require('lib/reactor')
 ###
 
 # config
-configFile=process.argv[2]
-throw 'no config file!' unless configFile?
-config= JSON.parse(fs.readFileSync configFile)
-throw 'no config!' unless config?
+config= require('lib/readConfig')
 tasks= config?.sections
-throw 'config: no tasks!' unless tasks?
 
 # kickoff
 tasks.map buildTask.bind(taskRunner.runners)
-
 log.info "running #{tasks.length} #{u.plural('check', tasks)}…"
 do workflow= (tasks)->
   # run each task async:
