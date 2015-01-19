@@ -24,7 +24,8 @@ config= require('lib/readConfig')
 tasks= config?.sections
 
 # kickoff
-tasks.map buildTask.bind(taskRunner.runners)
+console.log 'tasks', tasks
+tasks= tasks.map buildTask
 log.info "running #{tasks.length} #{u.plural('check', tasks)}…"
 do workflow= (tasks)->
   # run each task async:

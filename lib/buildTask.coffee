@@ -1,7 +1,7 @@
 f= require('lodash')
+runners= Object.keys(require('lib/runners'))
 
 module.exports = buildTask= (task, callback) ->
-  runners= this
   type = f.first f.compact f.map runners, (r)-> if task[r]? then r
   check= { data: task[type] }
   unless check?

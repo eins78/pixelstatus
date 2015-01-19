@@ -12,6 +12,4 @@ taskRunner= (callback) ->
       log.error('check runner error!', task.id, task.check, err)
     callback(err, res)
 
-taskRunner.runners = Object.keys(runByType)
-
 module.exports = taskRunner
