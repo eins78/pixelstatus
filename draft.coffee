@@ -14,9 +14,9 @@ reactToResult= require('lib/reactor')
 ###
   TODO:
     - check config: json-schema, overlapping ranges
-    - build LED colors from assertion
-    - run command with `child_process.spawn`
-    - task.always - color
+    - set LED colors from assertion for section
+    - runner: command with `child_process.spawn`
+    - runner: always
 ###
 
 # config
