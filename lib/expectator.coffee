@@ -1,5 +1,5 @@
 async= require('async')
-expect= require('ruler')
+expect= require('ruler/lib/ruler')
 log= require('lib/logger')
 
 expectResult_with_ruler= (res, callback)->
