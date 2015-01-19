@@ -1,5 +1,5 @@
 f= require('lodash')
-log= require('./logger')
+log= require('lib/logger')
 
 module.exports= reactToResult= (res, callback) ->
   task= this

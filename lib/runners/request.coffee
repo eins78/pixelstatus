@@ -1,4 +1,4 @@
-log = require('../logger')
+log = require('lib/logger')
 
 module.exports = runRequest= (check, callback) ->
   request= require('request')

@@ -1,6 +1,6 @@
 async= require('async')
 expect= require('ruler')
-log= require('./logger.js')
+log= require('lib/logger')
 
 expectResult_with_ruler= (res, callback)->
   task= this

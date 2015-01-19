@@ -1,5 +1,5 @@
 opc = require('open-pixel-control')
-log = require('./logger')
+log = require('lib/logger')
 
 module.exports = pixel=
   connect: (config, callback)->

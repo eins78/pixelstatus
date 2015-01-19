@@ -1,5 +1,5 @@
-log= require('./logger')
-runByType= require('./runners')
+log= require('lib/logger')
+runByType= require('lib/runners')
 
 taskRunner= (callback) ->
   task= this
