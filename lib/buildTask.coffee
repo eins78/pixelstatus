@@ -1,14 +1,16 @@
 f= require('lodash')
-runners= Object.keys(require('lib/runners'))
+
+# we only need them for validation
+runners= Object.keys(require('lib/runners/index.coffee'))
 
 module.exports = buildTask= (task, callback) ->
-  type = f.first f.compact f.map runners, (r)-> if task[r]? then r
-  check= { data: task[type] }
-  unless check?
-    throw "task #{task?.id}: no valid runner! #{runners.join(', ')}"
-  
-  task.check = check
-  delete task[type]
-  task.check.type = type
-  
-  task
+  # get the first key with the name of a valid runner
+  runner = f.first f.compact f.map runners, (r)-> if task[r]? then r
+  data = task[runner]
+
+  unless data?
+    throw "task #{task?.id}: no valid runner! try one of: #{runners.join(', ')}"
+
+  f.merge {},
+    f.omit(task, runner),
+    { check: { data: data, type: runner } }

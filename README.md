@@ -18,9 +18,25 @@ npm run demo
 ![GIF of demo](https://cloud.githubusercontent.com/assets/134942/5794524/d8d94c6e-9f71-11e4-805e-effd4e89590f.gif)
 
 
-## JSON Configuration
+## Configuration
 
-See the [example below](#example) and consult this description if questions arise. The example has two sections, the first is the most minimal, the other is the most verbose config.
+### Overview
+
+- **SECTION** a section of continuos PIXELS on a strip  
+  *has one:*
+    - **TASK** something to do *(HTTP request, shell command)*  
+    *has one:*
+        - **COMPARISON** rule(s) to compare against result of a TASK *(expect)*  
+        *has one:*
+            - **REACTION** a state to set on the SECTION
+
+- **STATE** what to with the PIXELS of a SECTION *(set them to a color)*
+
+### JSON object
+
+Detailed description, if needed. 
+See also the [example config][] and consult this description if questions arise.
+The example has two sections, the first is the most minimal, the other is the most verbose config.
 
 - **`colors`**: Object. Keys are names of colors to be used in rest of config, values are valid `CSS` color strings (names, hex, hsl, …).
 - **`sections`**: Array of Objects with keys:
@@ -39,7 +55,7 @@ See the [example below](#example) and consult this description if questions aris
 - `fail`: if `assert` was false, set section to this color
 
 
-### Runners
+### Tasks
 
 #### `request`
 
@@ -75,7 +91,11 @@ See API there, short synopsis below.
     }
     ```
 
-### Expectations
+### Comparisons
+
+The is only one option at the moment:
+
+#### `expect`
 
 Can be in one of the following forms
 - simple value (number, string): must be exactly equal to compared value
@@ -86,9 +106,6 @@ Can be in one of the following forms
 - `{ "status": { truthy: "" } }`
 - `{ "err": { falsy: "" } }` -->
 
-### Example 
-
-[see here](https://github.com/eins78/statuspixel/blob/master/examples/config.json)
 
 
 ## CLI
@@ -120,7 +137,7 @@ The whole project uses lots of great free/open modules and projects:
 
 It is written in [CoffeScript](http://coffeescript.org).
 
-
+[example config]: <https://github.com/eins78/statuspixel/blob/master/examples/config.json>
 [`must`]: <https://github.com/moll/js-must/blob/master/doc/API.md>
 [`ruler`]: <https://www.npmjs.com/package/ruler>
 [`request`]: <https://www.npmjs.com/package/request>

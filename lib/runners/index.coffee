@@ -2,7 +2,7 @@ fs= require('fs')
 path= require('path')
 f= require('lodash')
 
-SUFFIX= /\.js$/
+SUFFIX= /\.coffee$/
 
 modules= fs.readdirSync(__dirname)
               .filter (file)-> SUFFIX.test(file)

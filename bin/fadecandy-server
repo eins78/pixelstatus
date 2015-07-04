@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+OS=$(node -p 'process.platform')
+
+if [[ $OS = 'darwin' ]]; then
+  ./vendor/fadecandy/bin/fcserver-osx &
+  exit 0
+fi  
+
+if [[ $OS = 'linux' ]]; then
+  ./vendor/fadecandy/bin/fcserver-rpi &
+  exit 0
+fi
+
+echo 'unsupported OS!'
+exit 1

@@ -1,15 +1,16 @@
 {
   "name": "statuspixel",
-  "version": "0.1.0",
+  "version": "1.0.0-beta.1",
   "description": "openpixelcontrol client for status displays",
-  "main": "index.js",
+  "main": "app.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run git && npm run coffee",
+    "start": "coffee app.coffee",
+    "build": "npm run git",
     "demo": "npm run build && npm run simulator & sleep 3 && npm run pixeltest",
     "git": "git submodule update --init",
-    "coffee": "find */* -name '*.coffee' -print0 | xargs -0 coffee -c",
-    "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/4-box-layout.json",
+    "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/simulator-layouts/4-box-layout.json",
+    "fadecandy-server": "bin/fadecandy-server",
     "pixeltest": "coffee ./pixeltest.coffee"
   },
   "repository": {
@@ -20,7 +21,8 @@
     "openpixelcontrol",
     "opc",
     "neopixel",
-    "fadecandy"
+    "fadecandy",
+    "IoT"
   ],
   "author": "Max F. Albrecht <1@178.is>",
   "license": "MIT",
@@ -31,13 +33,15 @@
   "dependencies": {
     "async": "^0.9.0",
     "colour.js": "^1.5.2",
-    "lodash": "^2.4.1",
-    "open-pixel-control": "https://github.com/eins78/node-open-pixel-control/tarball/master",
+    "is-integer": "^1.0.4",
+    "lodash": "^3.8.0",
+    "opc": "^1.1.2",
     "request": "^2.51.0",
     "ruler": "^1.0.0",
-    "winston": "^0.8.3"
+    "winston": "^0.8.3",
+    "coffee-script": "^1.8.0"
   },
   "devDependencies": {
-    "coffee-script": "^1.8.0"
+    "opc-simulator": "https://github.com/parshap/opc-simulator/tarball/master"
   }
 }
