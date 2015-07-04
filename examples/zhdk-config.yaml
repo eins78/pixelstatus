@@ -1,11 +1,16 @@
 ---
-# colors:
-#   green: green
-#   red: red
-#   white: "#ccc"
-# connection:
-#   host: localhost
-#   port: 7890
+colors:
+  red: "hsla(0, 100%, 59%, 1)"
+  yellow: "hsla(59, 100%, 56%, 1)"
+  green: "hsla(111, 100%, 60%, 1)"
+  cyan: "hsla(171, 100%, 54%, 1)"
+  blue: "hsla(239, 100%, 60%, 1)"
+  purple: "hsla(276, 100%, 60%, 1)"
+  pink: "hsla(322, 100%, 59%, 1)"
+  white: "#ccc"
+connection:
+  host: localhost
+  port: 7890
 
 # TODO: adress individual fadecandy strips and loose the spacers.
 # or: better config in pixelwall server?
@@ -44,7 +49,7 @@ sections:
     length: 4
 
   - id: fourth_box # bottom right
-    description: Madek v3 
+    description: Madek v3
     length: 120
     ok: green
     fail: red
