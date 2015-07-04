@@ -3,7 +3,7 @@ LENGTH=60
 async = require('async')
 f= require('lodash')
 
-log= require('lib/logger.coffee')
+log= require('../logger')
 
 pixel_controller= null
 
@@ -12,14 +12,15 @@ class Reactor
     return new Reactor(@pixels) unless (@ instanceof Reactor)
     pixel_controller = @pixels
 
-  react: (res, callback) ->
+  react: (result, callback) ->
     task= this
 
-    unless pixels?.set?
+    unless typeof pixels?.set is 'function'
       callback 'reactor: no pixels connected!'
 
-    section= task?.id
-    state= (if f.reduce(f.flatten(res)) then 'ok' else 'fail')
+    section= task.id
+    state= (if result.ok then 'ok' else 'fail')
+
     wanted= task[state]
 
     log.info "#{section}: #{state}. setting to #{wanted}"

@@ -1,0 +1,11 @@
+---
+title: "Is the internet working???"
+sections:
+  - id: get_example_com
+    length: 1
+    request: http://example.com
+    expect:
+      status:
+        eq: 200
+    ok: green
+    fail: red

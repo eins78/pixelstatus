@@ -1,9 +1,16 @@
 async= require('async')
+f= require('lodash')
 expect= require('ruler/lib/ruler')
 
-log= require('lib/logger.coffee')
+log= require('../logger')
 
-expectResult_with_ruler= (res, callback)->
+summarizeResults=(list)->
+  {
+    ok: f(list).flatten().reduce()
+    details: list
+  }
+
+expectResult_with_ruler=(res, callback)->
   task= this
   targets= Object.keys(task.expect)
 
@@ -13,11 +20,12 @@ expectResult_with_ruler= (res, callback)->
     async.map expectations, (expectation, nextExpectation)->
       actual= res[target]
       expected= task.expect[target][expectation]
-      comparator = expect().rule(target)[expectation](expected)
-      unless 'function' == typeof comparator.test
-        throw 'comparator not found!'
 
-      ok= comparator.test(res)
+      comparison= expect().rule(target)[expectation](expected)
+      unless 'function' == typeof comparison.test
+        throw 'comparison not found!'
+
+      ok= comparison.test(res)
 
       if ok
         log.debug "OK: '#{target}' #{expectation} #{expected}:", ok
@@ -25,11 +33,12 @@ expectResult_with_ruler= (res, callback)->
         log.verbose "NOT OK: '#{target}' #{expectation} #{expected}:", ok
         log.debug "'#{target}' actual:", actual
       # comparison is a bool and the result of this module
-      # it's not an error in control-flow sense – don't exit async!
+      # - it's not an error in control-flow sense – don't exit async!
       nextExpectation(null, ok)
 
     , nextTarget
 
-  , callback
+  , # 'results' is a list of bools for all expectations of 'target':
+  (err, results)-> callback(err, summarizeResults(results))
 
 module.exports = expectResult_with_ruler

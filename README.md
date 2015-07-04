@@ -34,9 +34,10 @@ npm run demo
 
 ### JSON object
 
-Detailed description, if needed. 
-See also the [example config][] and consult this description if questions arise.
-The example has two sections, the first is the most minimal, the other is the most verbose config.
+See the "Full" ([`JSON`][full-conf-json], [`YAML`][full-conf-yaml])
+and "Minimal" ([`JSON`][mini-conf-json], [`YAML`][mini-conf-yaml])
+example configuration files and consult this description should questions arise.
+The "Full" example has two sections, the first is the most minimal, the other is the most verbose config for a section.
 
 - **`colors`**: Object. Keys are names of colors to be used in rest of config, values are valid `CSS` color strings (names, hex, hsl, …).
 - **`sections`**: Array of Objects with keys:
@@ -50,7 +51,7 @@ The example has two sections, the first is the most minimal, the other is the mo
         - `status`: exit status of `command`, or http status of `request`
         - `output`: `stdout` of `command`, or `res` of `request`
         - `error`: `stderr` of `command`, or `err` of `request`
-    
+
 - `ok`: if `assert` was true, set section to this color
 - `fail`: if `assert` was false, set section to this color
 
@@ -115,6 +116,7 @@ Can be in one of the following forms
 ### config
 
 First argument must be the path to a [config file](#json-configuation).
+It can be a `JSON`-file as described above, or (structurally equivalent) `YAML`.
 
 ### loglevel
 
@@ -128,16 +130,15 @@ The whole project uses lots of great free/open modules and projects:
 
 - <https://github.com/scanlime/fadecandy>
 - <http://openpixelcontrol.org>
-- <https://www.npmjs.com/package/open-pixel-control>
-- <https://www.npmjs.com/package/request>
-- <https://www.npmjs.com/package/ruler>
-- <https://www.npmjs.com/package/async>
 - <https://lodash.com>
-- <https://www.npmjs.com/package/must>
+- also see [`package.json`](https://github.com/eins78/statuspixel/blob/master/examples/config.json) for all the npm packages that are used
 
 It is written in [CoffeScript](http://coffeescript.org).
 
-[example config]: <https://github.com/eins78/statuspixel/blob/master/examples/config.json>
 [`must`]: <https://github.com/moll/js-must/blob/master/doc/API.md>
 [`ruler`]: <https://www.npmjs.com/package/ruler>
 [`request`]: <https://www.npmjs.com/package/request>
+[full-conf-json]: <https://github.com/eins78/statuspixel/blob/master/examples/npm-status-config.json>
+[full-conf-yaml]: <https://github.com/eins78/statuspixel/blob/master/examples/npm-status-config.yaml>
+[mini-conf-json]: <https://github.com/eins78/statuspixel/blob/master/examples/minimal-config.json>
+[mini-conf-yaml]: <https://github.com/eins78/statuspixel/blob/master/examples/minimal-config.json>

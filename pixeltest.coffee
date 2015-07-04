@@ -1,5 +1,5 @@
-PixelController= require('lib/pixelController')
-parseColor= require('lib/parseColor')
+PixelController= require('pixel')
+parseColor= require('./lib/parseColor')
 Color= require('colour.js')
 f= require('lodash')
 async= require('async')
@@ -7,9 +7,13 @@ hertz= require('hertz')
 
 SECTIONS= {
   one: { length: 60 },
+  _one_space: { length: 4 },
   two: { length: 60 },
+  _two_space: { length: 4 },
   three: { length: 60 },
+  _three_space: { length: 4 },
   four: { length: 60 }
+  _four_space: { length: 4 }
 }
 
 rainbowColorForPoint= (num, max, offset = 0)->
@@ -70,7 +74,7 @@ pixel.init (err)->
   strip=0
 
   setTimeout ->
-    pixel.setAllSections('green')
+    pixel.setAllSections('black')
 
     setTimeout ->
       pixel.set('one', 'red')
@@ -95,8 +99,10 @@ pixel.init (err)->
               'yellow'
               'black'
             ]
-            async.forever f.curry(wipe_list)(color_list, 'two', 60, 60)
-            async.forever f.curry(wipe_list)(color_list, 'three', 60, 60)
+            async.forever f.curry(wipe_list)(color_list, 'one', 60, 25)
+            async.forever f.curry(wipe_list)(color_list, 'two', 60, 25)
+            async.forever f.curry(wipe_list)(color_list, 'three', 60, 25)
+            async.forever f.curry(wipe_list)(color_list, 'four', 60, 25)
           , 2500
         , 2500
       , 2500

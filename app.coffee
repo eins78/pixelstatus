@@ -8,15 +8,20 @@ WAIT=3    # seconds to wait between checks
 # deps
 async= require('async')
 f= require('lodash')
-u= require('lib/util.coffee')
-log= require('lib/logger.coffee')
+
+# setup `require('lib/foo')` with `.coffee` extension
+require('coffee-script/register')
+
+
+u= require('./lib/util')
+log= require('./lib/logger')
 
 # lib
-buildTask= require('lib/buildTask.coffee')
+buildTask= require('./lib/buildTask')
 # workflow
-taskRunner= require('lib/workflow/taskRunner.coffee')
-expectator= require('lib/workflow/expectator.coffee')
-Reactor= require('lib/workflow/reactor.coffee')
+taskRunner= require('./lib/workflow/taskRunner')
+expectator= require('./lib/workflow/expectator')
+Reactor= require('./lib/workflow/reactor')
 
 ###
   TODO:
@@ -27,7 +32,7 @@ Reactor= require('lib/workflow/reactor.coffee')
 ###
 
 # config
-config= require('lib/readConfig.coffee')
+config= require('./lib/readConfig')
 sections= config?.sections
 pixelSections = f(sections).map((section)->
   [section?.id, { length: section?.length }])
@@ -45,11 +50,14 @@ loop_if_configured= (fn)-> if LOOP and fn then async.forever(fn) else do fn
 tasks= sections.map buildTask
 log.info "[wall]: running #{tasks.length} #{u.plural('task', tasks)}…"
 
-PixelController= require('lib/pixelController.coffee')
+PixelController= require('pixel')
 pixels = PixelController(f.merge({}, config, { sections: pixelSections }))
 reactor = Reactor(pixels)
 
 pixels.init (err)->
+  if err?
+    throw '[wall]: pixels init failed! ' + err
+  pixels.setAllSections('salmon')
   loop_if_configured (next)->
     # run each task async:
     async.mapLimit tasks, LIMIT, (task, callback)->

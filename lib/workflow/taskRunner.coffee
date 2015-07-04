@@ -1,5 +1,5 @@
-log= require('lib/logger.coffee')
-runByType= require('lib/runners/index.coffee')
+log= require('../logger')
+runByType= require('../runners')
 
 # runs a single `task` with appropriate `runner` for it's type `type`
 taskRunner= (callback) ->

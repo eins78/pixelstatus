@@ -1,6 +1,6 @@
 {
   "name": "statuspixel",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "openpixelcontrol client for status displays",
   "main": "app.coffee",
   "scripts": {
@@ -11,7 +11,8 @@
     "git": "git submodule update --init",
     "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/simulator-layouts/4-box-layout.json",
     "fadecandy-server": "bin/fadecandy-server",
-    "pixeltest": "coffee ./pixeltest.coffee"
+    "pixeltest": "coffee ./pixeltest.coffee",
+    "check-deps": "coffee -e 'console.log(require(\"check-dependencies\")?.sync()?.error?.join?(\"\\n\"))'"
   },
   "repository": {
     "type": "git",
@@ -32,16 +33,21 @@
   "homepage": "https://github.com/eins78/statuspixel",
   "dependencies": {
     "async": "^0.9.0",
+    "browserify": "^10.1.3",
+    "check-dependencies": "^0.9.2",
+    "coffee-script": "^1.9.2",
+    "coffeeify": "^1.1.0",
     "colour.js": "^1.5.2",
+    "getusermedia": "^1.2.1",
+    "hertz": "^1.1.1",
     "is-integer": "^1.0.4",
-    "lodash": "^3.8.0",
+    "js-yaml": "^3.3.1",
+    "lodash": "^3.9.3",
     "opc": "^1.1.2",
-    "request": "^2.51.0",
+    "request": "^2.55.0",
     "ruler": "^1.0.0",
-    "winston": "^0.8.3",
-    "coffee-script": "^1.8.0"
+    "utile": "^0.3.0",
+    "winston": "^1.0.0"
   },
-  "devDependencies": {
-    "opc-simulator": "https://github.com/parshap/opc-simulator/tarball/master"
-  }
+  "devDependencies": {}
 }

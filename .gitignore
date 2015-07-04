@@ -1,5 +1,7 @@
 *.js
 !examples/*.js
 node_modules/*
-!node_modules/lib
+!node_modules/pixel
+node_modules/pixel/node_modules/*
+npm-debug.log
 dev

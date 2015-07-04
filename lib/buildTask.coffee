@@ -1,7 +1,7 @@
 f= require('lodash')
 
 # we only need them for validation
-runners= Object.keys(require('lib/runners/index.coffee'))
+runners= Object.keys(require('./runners'))
 
 module.exports = buildTask= (task, callback) ->
   # get the first key with the name of a valid runner

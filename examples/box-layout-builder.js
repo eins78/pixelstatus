@@ -2,7 +2,7 @@ var layout = [];
 var spacing = 0.05;
 
 var oneStrip = [];
-for (var i = 0; i < 60; i++) {
+for (var i = 0; i < 64; i++) {
   oneStrip.push(i);
 };
 
