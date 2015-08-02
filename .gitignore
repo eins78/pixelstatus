@@ -1,7 +1,14 @@
+npm-debug.log
+dev
+
 *.js
 !examples/*.js
+
 node_modules/*
 !node_modules/pixel
 node_modules/pixel/node_modules/*
-npm-debug.log
-dev
+
+!www/*.js
+!www/**/*.js
+www/dist
+www/node_modules/*

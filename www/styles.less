@@ -1,0 +1,33 @@
+@import "~bootstrap/less/bootstrap";
+
+.editor:extend(.panel-body all, .form-group all) {}
+
+section:extend(.container-fluid all, .row all) {}
+section h2:extend(.page-header all, .col-sm-12 all) {}
+
+.preview {
+  background-color: lightgray;
+  min-height: 5em;
+  position: relative;
+  .color-name {
+    color: hsla(0,0%,0%,0.5);
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 8px;
+  }
+  &.OK {
+    background-color: lightgreen //#9f0
+  }
+}
+
+ul.inline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+td pre {
+  margin: 0
+}
+body { font-family: "Source Sans Pro", Helvetica, sans-serif }
+pre, code, kbd, .panel { font-family: "Source Code Pro", monospace }
