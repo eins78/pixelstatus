@@ -42,6 +42,10 @@ pixels.init (err)->
   pixels.setAllSections('salmon')
   worker(config, pixels)
 
+  # setup and init web interface and api server
+  require('./lib/server')(config, pixels)
+
+
 # exit handlers (shutdown lights on exit)
 exitHandler= (err)->
   do f.once ->
