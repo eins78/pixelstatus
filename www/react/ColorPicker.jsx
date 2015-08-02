@@ -1,21 +1,13 @@
 var React = require('react')
+var ampersandReactMixin = require('ampersand-react-mixin')
 var Color = require('color')
 var f = require('lodash')
 
-var Preview = React.createClass({
-  render: function () {
-    var color = Color(this.props.color)
-    var hsl = color.hslString()
-
-    return (
-      <div className='preview' style={{background: hsl}}>
-        <div className='color-name'>{hsl}</div>
-      </div>
-    )
-  }
-})
-
-var Editor = React.createClass({
+// TODO: fold into main export component
+// (not needed since the preview is not wrapped anymore)
+var EditForm = React.createClass({
+  displayName: 'ColorPickerEditor',
+  mixins: [ampersandReactMixin],
   render: function () {
     var color = Color(this.props.color)
     var updateColor = this.props.handleChange
@@ -38,6 +30,7 @@ var Editor = React.createClass({
       }
     ]
 
+    // build controls from config
     var controls = controlsConf.map(function (c) {
       var currentValue = color[c.keyName]()
 
@@ -53,9 +46,9 @@ var Editor = React.createClass({
     })
 
     return (
-      <form className='editor form-horizontal'>
+      <div className='editor form-horizontal'>
         {controls}
-      </form>
+      </div>
     )
   }
 })
@@ -67,43 +60,52 @@ var ValueControl = React.createClass({
     var value = this.props.value
     var handler = this.props.handleChange
 
-    return (<div>
-      <div className='col-xs-2'>
-        <label title={name} className='text-center control-label'>
-          {f(name).first}
-        </label>
-      </div>
-
-      <div className='col-xs-7'>
-        <input type='range' min='0' max={range}
-              value={value} onChange={handler}
-              className='form-control' />
-      </div>
-
-      <div className='col-xs-3'>
-        <input type='text' value={value} onChange={handler}
-              className='form-control text-right'/>
-      </div>
-    </div>)
-  }
-})
-
-var ColorPicker = React.createClass({
-  getInitialState: function() {
-    return { color: Color(this.props.color) }
-  },
-  updateColor: function(color) {
-    this.setState({ color: Color(color) })
-  },
-  render: function () {
-    var color = this.state.color
     return (
       <div>
-        <Preview color={color}/>
-        <Editor color={color} handleChange={this.updateColor}/>
+        <div className='col-xs-2'>
+          <label title={name} className='text-center control-label'>
+            {f(name).first}
+          </label>
+        </div>
+
+        <div className='col-xs-7'>
+          <input type='range' min='0' max={range}
+                value={value} onChange={handler}
+                className='form-control' />
+        </div>
+
+        <div className='col-xs-3'>
+          <input type='text' value={value} onChange={handler}
+                className='form-control text-right'/>
+        </div>
       </div>
     )
   }
 })
 
-module.exports = ColorPicker
+module.exports = React.createClass({
+  displayName: 'ColorPicker',
+  getInitialState: function() {
+    return { color: Color(this.props.color) }
+  },
+  updateColor: function(color) {
+    // parse into `color` object
+    var color = Color(color)
+    // set state internal to this component (plain object):
+    this.setState({ color: color })
+    // callback the handler of the "super/parent" component
+    //  **with a valid CSS color**!
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(color.hslString())
+    }
+  },
+  render: function () {
+    var color = this.state.color
+    return (
+      <div>
+        <EditForm color={color}
+          handleChange={this.updateColor}/>
+      </div>
+    )
+  }
+})

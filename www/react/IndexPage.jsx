@@ -1,35 +1,38 @@
 var React = require('react')
-var Header = require('./Header')
-var SectionPanel = require('./SectionPanel')
+var ampersandReactMixin = require('ampersand-react-mixin')
+
+var PixelServerShow = require('./PixelServerShow')
 
 var SECTIONS = [
   { name: 'npm_web', color: 'lightgreen' },
   { name: 'npm_reg', color: 'lightsalmon' }
 ]
 
-var SectionsList = React.createClass({
+var TestPre= React.createClass({
   render: function () {
-    var panels = this.props.sections.map(function (s) {
-      return <SectionPanel section={s} key={s.name}/>
-    })
-
-    return <section id="sections">
-      <h2>
-        sections
-      </h2>
-      <div className='row'>
-        {panels}
-      </div>
-    </section>
+    return (
+      <pre>{JSON.stringify(this.props.servers,0,2)}</pre>
+    )
   }
 })
 
 module.exports = React.createClass({
   displayName: 'IndexPage',
+  mixins: [ampersandReactMixin],
+
   render: function () {
-    return <div className='container'>
-      <Header name='statuspixel'/>
-      <SectionsList sections={SECTIONS}/>
-    </div>
+    var me = this.props.me
+
+    console.log('RENDER IndexPage', me);
+
+    return (
+      <div>
+
+        <h3>{me.title}</h3>
+
+        <PixelServerShow sections={me.sections}/>
+
+      </div>
+    )
   }
 })

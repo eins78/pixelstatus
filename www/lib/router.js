@@ -1,18 +1,21 @@
 var Router = require('ampersand-router')
 var React = require('react')
+var app = require('ampersand-app')
 
+var Layout = require('../react/Layout')
 var IndexPage = require('../react/IndexPage')
 
 module.exports = Router.extend({
-  routes: {
-    '': 'public',
-    'test': 'test'
+  renderPage: function (page) {
+    page = (
+      <Layout pageTitle='pixelstatus'>
+        {page}
+      </Layout>
+    )
+    React.render(page, document.body)
   },
-  public: function () {
-    React.render(<IndexPage/>, document.body)
-  },
-  test: function () {
-    console.log('test');
-    React.render(<IndexPage/>, document.body)
+  routes: { '': 'index' },
+  index: function () {
+    this.renderPage(<IndexPage me={app.me}/>)
   }
 })
