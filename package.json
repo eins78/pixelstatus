@@ -39,6 +39,7 @@
     "coffeeify": "^1.1.0",
     "colour.js": "^1.5.2",
     "getusermedia": "^1.2.1",
+    "hapi": "^8.8.0",
     "hertz": "^1.1.1",
     "is-integer": "^1.0.4",
     "js-yaml": "^3.3.1",

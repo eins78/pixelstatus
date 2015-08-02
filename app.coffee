@@ -1,22 +1,19 @@
 #!/usr/bin/env coffee
 
-# consts
-LIMIT=2  # how many jobs to run at a time?
-LOOP=true # run it forever?
-WAIT=3    # seconds to wait between checks
-
-# deps
 async= require('async')
 f= require('lodash')
-
 # setup `require('lib/foo')` with `.coffee` extension
 require('coffee-script/register')
 
-
-u= require('./lib/util')
-log= require('./lib/logger')
+# CONFIG
+config= f.defaults require('./lib/readConfig'),
+  loop:  true # run it forever?
+  limit: 8    # how many jobs to run at a time?
+  wait:  3    # seconds to wait between checks
 
 # lib
+u= require('./lib/util')
+log= require('./lib/logger')
 buildTask= require('./lib/buildTask')
 # workflow
 taskRunner= require('./lib/workflow/taskRunner')
@@ -31,57 +28,33 @@ Reactor= require('./lib/workflow/reactor')
     - runner: always
 ###
 
-# config
-config= require('./lib/readConfig')
-sections= config?.sections
-pixelSections = f(sections).map((section)->
+# setup hardware
+pixelSections = f(config.sections).map((section)->
   [section?.id, { length: section?.length }])
   .zipObject().value() # e.g. `{ foo: { length: 1 }, bar: { length: 1 } }`
-
-
-wait= (fn, seconds = 60) ->
-  seconds = seconds
-  log.info "[wall]: waiting #{seconds} seconds…"
-  setTimeout fn, seconds*1000
-
-loop_if_configured= (fn)-> if LOOP and fn then async.forever(fn) else do fn
-
-# kickoff
-tasks= sections.map buildTask
-log.info "[wall]: running #{tasks.length} #{u.plural('task', tasks)}…"
-
 PixelController= require('pixel')
 pixels = PixelController(f.merge({}, config, { sections: pixelSections }))
-reactor = Reactor(pixels)
 
+# init hardware and start worker
+worker = require('./lib/worker')
 pixels.init (err)->
-  if err?
-    throw '[wall]: pixels init failed! ' + err
+  if err? then throw '[wall]: pixels init failed! ' + err
   pixels.setAllSections('salmon')
-  loop_if_configured (next)->
-    # run each task async:
-    async.mapLimit tasks, LIMIT, (task, callback)->
-        # task async workflow:
-        # - each step has this=task and callback(err, res)
-        # - all steps gets `res` from step before as first arg
-        workflow= [taskRunner, expectator, reactor.react]
-        async.waterfall(workflow.map((step)->step.bind(task)), callback)
-    , (err)->
-      log.error('[wall]: error', err) if err?
-      if next?
-        wait(next, WAIT)
-      else
-        process.exit(0)
+  worker(config, pixels)
 
-exitHandler=(err)->
+# exit handlers (shutdown lights on exit)
+exitHandler= (err)->
   do f.once ->
-    log.info '[wall]: exiting…', if err? then err else 'ok'
+    if err?
+      log.error('[wall]: error!', err)
+    else
+      log.info('[wall]: exiting…', if err? then err else 'ok')
     if pixels?.connected
       log.verbose '[wall]: setting black…'
       pixels.setAllSections('black')
       pixels.connected = false
   process.exit(if err? then 1 else 0)
 
-process.on 'SIGINT', exitHandler
+# process.on 'SIGINT', exitHandler
 # process.on 'exit', exitHandler
-process.on 'uncaughtException', exitHandler
+# process.on 'uncaughtException', exitHandler
