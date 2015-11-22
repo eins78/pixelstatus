@@ -16,42 +16,54 @@ connection:
 # or: better config in pixelwall server?
 sections:
   - id: first_box # top left
-    description: HTTP GET medienarchiv.zhdk.ch
+    description: Franco CI status
     strip: 1
     length: 60
-    request: http://medienarchiv.zhdk.ch
-    expect:
-      status:
-        gte: 200
-        lt: 300
-      output:
-        contains: "Digitales Areal ZHdK"
+    # request: http://medienarchiv.zhdk.ch
+    # expect:
+    #   status:
+    #     gte: 200
+    #     lt: 300
+    #   output:
+    #     contains: "Digitales Areal ZHdK"
+    request: x
+    expect: {}
     ok: green
     fail: red
-  - id: first_box_unadressed # spacer
-    length: 4
+
+  - {id: first_box_spacer, length: 4,
+    request: x, expect: {}, ok: black}
 
   - id: second_box # top right
-    description: Madek 3 Tests
+    description: Tom CI status
     strip: 2
     length: 60
+    request: x
+    expect: {}
     ok: green
     fail: red
-  - id: second_box_unadressed # spacer
-    length: 4
+
+  - {id: second_box_spacer, length: 4,
+    request: x, expect: {}, ok: black}
 
   - id: third_box # bottom left
-    description: "TODO"
+    description: "Matus CI status"
     length: 60
+    request: x
+    expect: {}
     ok: green
     fail: red
-  - id: third_box_unadressed # spacer
-    length: 4
+
+  - {id: third_box_spacer, length: 4,
+    request: x, expect: {}, ok: black}
 
   - id: fourth_box # bottom right
-    description: Madek v3
+    description: "Max CI status"
     length: 120
+    request: x
+    expect: {}
     ok: green
     fail: red
-  - id: fourth_box_unadressed # spacer
-    length: 4
+
+  - {id: fourth_box_spacer, length: 4,
+    request: x, expect: {}, ok: black}
