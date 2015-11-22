@@ -35,15 +35,14 @@ pixelSections = f(config.sections).map((section)->
 PixelController= require('pixel')
 pixels = PixelController(f.merge({}, config, { sections: pixelSections }))
 
-# init hardware and start worker
+# init hardware, start worker and webserver (ui and api)
 worker = require('./lib/worker')
 pixels.init (err)->
   if err? then throw '[wall]: pixels init failed! ' + err
   pixels.setAllSections('salmon')
   worker(config, pixels)
-
-  # setup and init web interface and api server
   require('./lib/server')(config, pixels)
+  pixels.setAllSections('black')
 
 
 # exit handlers (shutdown lights on exit)
