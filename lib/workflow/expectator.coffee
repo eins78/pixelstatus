@@ -4,15 +4,16 @@ expect= require('ruler/lib/ruler')
 
 log= require('../logger')
 
-summarizeResults=(list)->
-  {
-    ok: f(list).flatten().reduce()
-    details: list
-  }
+summarizeExpectations=(list)-> f(list).flatten().reduce()
+buildResult=(isOk)-> { ok: isOk }
 
 expectResult_with_ruler=(res, callback)->
   task= this
   targets= Object.keys(task.expect)
+
+  if not targets.length
+    log.info 'NOT OK: No expectations found!'
+    return callback(null, buildResult(false))
 
   async.map targets, (target, nextTarget)->
     expectations= Object.keys(task.expect[target])
@@ -21,8 +22,8 @@ expectResult_with_ruler=(res, callback)->
       actual= res[target]
       expected= task.expect[target][expectation]
 
-      comparison= expect().rule(target)[expectation](expected)
-      unless 'function' == typeof comparison.test
+      comparison= f.get(expect().rule(target), [expectation, expected])
+      unless f.isFunction(f.get(comparison, 'test'))
         throw 'comparison not found!'
 
       ok= comparison.test(res)
@@ -39,6 +40,6 @@ expectResult_with_ruler=(res, callback)->
     , nextTarget
 
   , # 'results' is a list of bools for all expectations of 'target':
-  (err, results)-> callback(err, summarizeResults(results))
+  (err, results)-> callback(err, buildResult(summarizeExpectations(results)))
 
 module.exports = expectResult_with_ruler
