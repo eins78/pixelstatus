@@ -28,5 +28,18 @@ sections:
     fail: red
     request: https://example.com
     expect: # 'ok' http response with known content:
-      status: { gte: 200, lt: 300 }
-      body: { contains: '<h1>Example Domain</h1>' }
+      status: { 'at.least': 200, below: 300 }
+      body: { 'must.contain': '<h1>Example Domain</h1>' }
+
+  - id: top_right_box
+    description: "Is there nobody alone in space?"
+    length: 60
+    request: http://www.howmanypeopleareinspacerightnow.com/peopleinspace.json
+    ok: lightblue
+    fail: rebeccapurple
+    expect: # there are zero or more than one people in space:
+      'json.number': { 'not.is': 1 }
+      # # sanity checks because API is unofficial:
+      'json.number.constructor.name': { 'is.number': {} } # type check, no args
+      status: { 'at.least': 200, 'below': 300 }
+
