@@ -37,6 +37,7 @@ module.exports = expectResultWithRuler = (res, callback)->
 
 
 checkExpectation= (actual, expected, comparator)->
+  log.debug('checkExpectation', actual, expected, comparator)
   # NOTE: this looks weird, but since we are using a library made for testing,
   #       an 'undefined' result means true, and a throw means false!
   # TODO: comparator validation (on task level)
@@ -45,5 +46,7 @@ checkExpectation= (actual, expected, comparator)->
     f.chain([expect(actual)]).invoke(comparator, expected).any().value()
     true
   catch error
-    log.debug error
+     # re-raise if unexpected error:
+    throw error if not (error instanceof expect.AssertionError)
+    log.debug error.message
     false
