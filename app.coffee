@@ -2,8 +2,6 @@
 
 async= require('async')
 f= require('lodash')
-# setup `require('lib/foo')` with `.coffee` extension
-require('coffee-script/register')
 
 # CONFIG
 config= f.defaults require('./lib/readConfig'),

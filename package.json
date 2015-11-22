@@ -5,9 +5,9 @@
   "main": "app.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "coffee app.coffee",
-    "build": "npm run git",
-    "demo": "npm run build && npm run simulator & sleep 3 && npm run pixeltest",
+    "start": "npm run -s build && ./bin/status-pixel",
+    "build": "npm run -s git && cd www && npm run -s build && cd ..",
+    "demo": "npm run -s simulator & sleep 3 && npm start -- examples/minimal-config.yaml",
     "git": "git submodule update --init",
     "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/simulator-layouts/4-box-layout.json",
     "fadecandy-server": "bin/fadecandy-server",
