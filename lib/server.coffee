@@ -50,7 +50,7 @@ module.exports= (config, pixelController)->
       description: 'API: list all sections',
       tags: ['api']
     handler: (request, reply)->
-      sections = f(config.sections).map (s)-> {id: s.id}
+      sections = f.map(config.sections, (s)-> {id: s.id})
       reply(JSON.stringify(sections, 0, 2))
 
   server.route
@@ -60,8 +60,9 @@ module.exports= (config, pixelController)->
       description: 'API: get a section',
       tags: ['api']
     handler: (request, reply)->
-      section = f(config.sections).find id: request.params.section
-      section.color = section.ok # hack
+      unless (section = f(config.sections).find(id: request.params.section))?
+        return reply(Boom.notFound('Section not found: ' + section))
+      section.color = section.ok # hack for ui prototype
       reply(JSON.stringify(section, 0, 2))
 
   server.route
