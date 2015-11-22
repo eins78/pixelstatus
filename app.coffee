@@ -47,7 +47,8 @@ pixels.init (err)->
 
 
 # exit handlers (shutdown lights on exit)
-exitHandler= (err)->
+exitHandler= (errorOrStatus)->
+  err = errorOrStatus or null
   do f.once ->
     if err?
       log.error('[wall]: error!', err)
@@ -59,6 +60,6 @@ exitHandler= (err)->
       pixels.connected = false
   process.exit(if err? then 1 else 0)
 
-# process.on 'SIGINT', exitHandler
-# process.on 'exit', exitHandler
-# process.on 'uncaughtException', exitHandler
+process.on 'SIGINT', exitHandler
+process.on 'exit', exitHandler
+process.on 'uncaughtException', exitHandler
