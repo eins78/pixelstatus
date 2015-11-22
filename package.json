@@ -1,5 +1,5 @@
 {
-  "name": "statuspixel",
+  "name": "@eins78/statuspixel",
   "version": "1.0.0-beta.3",
   "description": "openpixelcontrol client for status displays",
   "main": "app.coffee",
