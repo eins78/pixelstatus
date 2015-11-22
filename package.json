@@ -4,7 +4,7 @@
   "description": "openpixelcontrol client for status displays",
   "main": "app.coffee",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Just checking the build\" && npm run -s build",
     "start": "npm run -s build && ./bin/status-pixel",
     "build": "npm run -s git && cd www && npm run -s build && cd ..",
     "demo": "npm run -s simulator & sleep 3 && npm start -- examples/minimal-config.yaml",
@@ -53,5 +53,7 @@
     "utile": "^0.3.0",
     "winston": "^1.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "semantic-release": "^4.3.5"
+  }
 }
