@@ -40,7 +40,7 @@ pixels.init (err)->
   pixels.setAllSections('salmon')
   worker(config, pixels)
   require('./lib/server')(config, pixels)
-  pixels.setAllSections('black')
+  # pixels.setAllSections('black')
 
 
 # exit handlers (shutdown lights on exit)
