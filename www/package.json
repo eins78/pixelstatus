@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
     "build": "NODE_ENV=production webpack",
+    "build-watch": "watch 'npm run -s build' .",
     "standard": "standard",
     "deploy": "npm run build && surge -p public -d somedomain.com"
   },
@@ -25,6 +26,7 @@
     "color": "^0.10.1",
     "lodash": "^3.10.0",
     "react": "^0.13.3",
+    "watch": "^0.16.0",
     "xhr": "^2.0.3"
   },
   "devDependencies": {

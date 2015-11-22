@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Just checking the build\" && npm run -s build",
     "start": "npm run -s build && ./bin/status-pixel",
+    "dev": "./bin/status-pixel",
     "build": "npm run -s git && cd www && npm run -s build && cd ..",
     "demo": "npm run -s simulator & sleep 3 && npm start -- examples/minimal-config.yaml",
     "git": "git submodule update --init",
