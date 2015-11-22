@@ -1,10 +1,12 @@
 # pixelstatus
 
-**`[WIP]`**
+**`[WORK IN PROGRESS]`**
 
 [![Build Status](https://img.shields.io/travis/eins78/pixelstatus/master.svg)](https://travis-ci.org/eins78/pixelstatus)
 
-display color-coded status of stuff with LED pixels.
+Build color-coded status screens with LED pixels, Raspberry Pi and fadecandy.  
+Configure section colors using expectations on a HTTP response.  
+Provides a daemon with task runner, REST API and Web UI.
 
 ## Demo
 
