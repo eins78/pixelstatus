@@ -32,7 +32,7 @@ sections:
         pass: password
         sendImmediately: false
       headers:
-        User-Agent: statuspixel
+        User-Agent: pixelstatus
     expect:
       output:
         contains: All Systems Operational
