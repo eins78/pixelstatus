@@ -37,7 +37,7 @@
           "sendImmediately": false
         },
         "headers": {
-          "User-Agent": "statuspixel"
+          "User-Agent": "pixelstatus"
         }
       },
       "expect": {

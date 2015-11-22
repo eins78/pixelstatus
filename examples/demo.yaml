@@ -43,3 +43,20 @@ sections:
       'json.number.constructor.name': { 'is.number': {} } # type check, no args
       status: { 'at.least': 200, 'below': 300 }
 
+  - id: bottom_left_box
+    description: Can we ping google.com?
+    length: 64
+    ok: blue
+    fail: pink
+    command: 'ping -c1 -W1 google.com'
+    expect: { 'status': { 'is': 0 } }
+
+  - id: bottom_right_box
+    description: Can we resolve google.com?
+    length: 64
+    ok: blue
+    fail: orange
+    command: 'nslookup google.com'
+    expect:
+      stdout:
+        'not.to.contain': 'NXDOMAIN'

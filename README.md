@@ -1,18 +1,20 @@
-# statuspixel
+# pixelstatus
 
-**`[WIP]`**
+**`[WORK IN PROGRESS]`**
 
-[![Build Status](https://img.shields.io/travis/eins78/statuspixel/master.svg)](https://travis-ci.org/eins78/statuspixel)
+[![Build Status](https://img.shields.io/travis/eins78/pixelstatus/master.svg)](https://travis-ci.org/eins78/pixelstatus)
 
-display color-coded status of stuff with LED pixels.
+Build color-coded status screens with LED pixels, Raspberry Pi and fadecandy.  
+Configure section colors using expectations on a HTTP response.  
+Provides a daemon with task runner, REST API and Web UI.
 
 ## Demo
 
 OpenGL Simulator:
 
 ```shell
-git clone https://github.com/eins78/statuspixel
-cd statuspixel
+git clone https://github.com/eins78/pixelstatus
+cd pixelstatus
 npm install
 npm run demo
 ```
@@ -88,7 +90,7 @@ See API there, short synopsis below.
           "sendImmediately": false
         },
         "headers": {
-          "User-Agent": "statuspixel"
+          "User-Agent": "pixelstatus"
         }
       }
     }
@@ -133,14 +135,14 @@ The whole project uses lots of great free/open modules and projects:
 - <https://github.com/scanlime/fadecandy>
 - <http://openpixelcontrol.org>
 - <https://lodash.com>
-- also see [`package.json`](https://github.com/eins78/statuspixel/blob/master/examples/config.json) for all the npm packages that are used
+- also see [`package.json`](https://github.com/eins78/pixelstatus/blob/master/examples/config.json) for all the npm packages that are used
 
 It is written in [CoffeScript](http://coffeescript.org).
 
 [`must`]: <https://github.com/moll/js-must/blob/master/doc/API.md>
 [`ruler`]: <https://www.npmjs.com/package/ruler>
 [`request`]: <https://www.npmjs.com/package/request>
-[full-conf-json]: <https://github.com/eins78/statuspixel/blob/master/examples/npm-status-config.json>
-[full-conf-yaml]: <https://github.com/eins78/statuspixel/blob/master/examples/npm-status-config.yaml>
-[mini-conf-json]: <https://github.com/eins78/statuspixel/blob/master/examples/minimal-config.json>
-[mini-conf-yaml]: <https://github.com/eins78/statuspixel/blob/master/examples/minimal-config.json>
+[full-conf-json]: <https://github.com/eins78/pixelstatus/blob/master/examples/npm-status-config.json>
+[full-conf-yaml]: <https://github.com/eins78/pixelstatus/blob/master/examples/npm-status-config.yaml>
+[mini-conf-json]: <https://github.com/eins78/pixelstatus/blob/master/examples/minimal-config.json>
+[mini-conf-yaml]: <https://github.com/eins78/pixelstatus/blob/master/examples/minimal-config.json>

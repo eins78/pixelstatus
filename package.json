@@ -1,12 +1,12 @@
 {
-  "name": "@eins78/statuspixel",
-  "version": "1.0.0-beta.5",
+  "name": "@eins78/pixelstatus",
+  "version": "1.0.0-beta.6",
   "description": "openpixelcontrol client for status displays",
   "main": "app.coffee",
   "scripts": {
     "test": "echo \"Just checking the build\" && npm run -s build",
-    "start": "npm run -s build && ./bin/status-pixel",
-    "dev": "./bin/status-pixel",
+    "start": "npm run -s build && ./bin/pixel-status",
+    "dev": "./bin/pixel-status",
     "build": "npm run -s git && cd www && npm run -s build && cd ..",
     "demo": "npm run -s simulator & sleep 3 && npm start -- examples/demo.yaml",
     "git": "git submodule update --init",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eins78/statuspixel"
+    "url": "https://github.com/eins78/pixelstatus"
   },
   "keywords": [
     "openpixelcontrol",
@@ -29,9 +29,9 @@
   "author": "Max F. Albrecht <1@178.is>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eins78/statuspixel/issues"
+    "url": "https://github.com/eins78/pixelstatus/issues"
   },
-  "homepage": "https://github.com/eins78/statuspixel",
+  "homepage": "https://github.com/eins78/pixelstatus",
   "dependencies": {
     "async": "^0.9.0",
     "boom": "^2.8.0",

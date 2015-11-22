@@ -38,11 +38,12 @@ module.exports = expectResultWithRuler = (res, callback)->
 
 checkExpectation= (actual, expected, comparator)->
   # NOTE: this looks weird, but since we are using a library made for testing,
-  #       an 'undefined' result means true, and a throw means false.
+  #       an 'undefined' result means true, and a throw means false!
   # TODO: comparator validation (on task level)
   try
-    # e.g. `f.invoke([expect(201)], 'at.least', 200)`
-    f.chain([expect(actual)]).invoke(comparator, expected).any().value() or true
+    # like `f.invoke([expect(201)], 'at.least', 200)`
+    f.chain([expect(actual)]).invoke(comparator, expected)
+    true
   catch error
     log.debug error
     false
