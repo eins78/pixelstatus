@@ -2,6 +2,8 @@
 
 **`[WIP]`**
 
+[![Build Status](https://img.shields.io/travis/eins78/statuspixel/master.svg)](https://travis-ci.org/eins78/statuspixel)
+
 display color-coded status of stuff with LED pixels.
 
 ## Demo
