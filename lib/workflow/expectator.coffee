@@ -42,7 +42,7 @@ checkExpectation= (actual, expected, comparator)->
   # TODO: comparator validation (on task level)
   try
     # like `f.invoke([expect(201)], 'at.least', 200)`
-    f.chain([expect(actual)]).invoke(comparator, expected)
+    f.chain([expect(actual)]).invoke(comparator, expected).any().value()
     true
   catch error
     log.debug error
