@@ -8,7 +8,7 @@
     "start": "npm run -s build && ./bin/status-pixel",
     "dev": "./bin/status-pixel",
     "build": "npm run -s git && cd www && npm run -s build && cd ..",
-    "demo": "npm run -s simulator & sleep 3 && npm start -- examples/minimal-config.yaml",
+    "demo": "npm run -s simulator & sleep 3 && npm start -- examples/demo.yaml",
     "git": "git submodule update --init",
     "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/simulator-layouts/4-box-layout.json",
     "fadecandy-server": "bin/fadecandy-server",

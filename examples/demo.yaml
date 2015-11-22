@@ -1,0 +1,32 @@
+---
+# general:
+limit: 8    # how many tasks to run at a time?
+wait:  10   # how long to wait before re-running a task
+
+# connection to OpenPixelControl server:
+connection:
+  host: localhost
+  port: 7890
+
+# overwrite common css color to normalize their brightness for LED displays:
+colors:
+  red: 'hsla(0, 100%, 59%, 1)'
+  yellow: 'hsla(59, 100%, 56%, 1)'
+  orange: 'hsla(35, 100%, 58%, 1)'
+  green: 'hsla(111, 100%, 60%, 1)'
+  cyan: 'hsla(171, 100%, 54%, 1)'
+  blue: 'hsla(239, 100%, 60%, 1)'
+  purple: 'hsla(276, 100%, 60%, 1)'
+  pink: 'hsla(322, 100%, 59%, 1)'
+  white: '#ccc'
+
+sections:
+  - id: top_left_box
+    description: Is the Internet working?
+    length: 64
+    ok: lightblue
+    fail: red
+    request: https://example.com
+    expect: # 'ok' http response with known content:
+      status: { gte: 200, lt: 300 }
+      body: { contains: '<h1>Example Domain</h1>' }
