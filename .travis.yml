@@ -3,4 +3,13 @@ language: node_js
 node_js:
   - '4'
 before_script:
-  - git submodule update --init --recursive && cd www && npm install && cd ..
+  - git submodule update --init --recursive && cd www && npm i && npm build && cd ..
+before_install:
+  - npm i -g npm@^2.0.0
+before_script:
+  - npm prune
+after_success:
+  - npm -s run semantic-release
+branches:
+  except:
+    - "/^v\\d+\\.\\d+\\.\\d+$/"

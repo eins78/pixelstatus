@@ -2,6 +2,7 @@
 
 **`[WORK IN PROGRESS]`**
 
+[![npm package](https://img.shields.io/npm/v/@eins78/pixelstatus.svg)](https://www.npmjs.com/package/@eins78/pixelstatus)
 [![Build Status](https://img.shields.io/travis/eins78/pixelstatus/master.svg)](https://travis-ci.org/eins78/pixelstatus)
 
 Build color-coded status screens with LED pixels, Raspberry Pi and fadecandy.  
