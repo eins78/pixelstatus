@@ -1,19 +1,20 @@
 {
   "name": "@eins78/pixelstatus",
-  "version": "1.0.0-beta.6",
   "description": "openpixelcontrol client for status displays",
   "main": "app.coffee",
   "scripts": {
     "test": "echo \"Just checking the build\" && npm run -s build",
     "start": "npm run -s build && ./bin/pixel-status",
     "dev": "./bin/pixel-status",
-    "build": "npm run -s git && cd www && npm run -s build && cd ..",
+    "build": "npm run -s git && cd www && npm i && npm run -s build && cd ..",
     "demo": "npm run -s simulator & sleep 3 && npm start -- examples/demo.yaml",
     "git": "git submodule update --init",
     "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/simulator-layouts/4-box-layout.json",
     "fadecandy-server": "bin/fadecandy-server",
     "pixeltest": "coffee ./pixeltest.coffee",
-    "check-deps": "coffee -e 'console.log(require(\"check-dependencies\")?.sync()?.error?.join?(\"\\n\"))'"
+    "check-deps": "coffee -e 'console.log(require(\"check-dependencies\")?.sync()?.error?.join?(\"\\n\"))'",
+    "prepublish": "npm run -s build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
