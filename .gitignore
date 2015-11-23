@@ -1,16 +1,8 @@
+node_modules
+src/www/node_modules/
 npm-debug.log
 dev
 
-# ignore js files
-*.js
-# but not the examples or the web ui
-!examples/*.js
-!www/*.js
-!www/**/*.js
-
-# but do ignore the web ui build and dependencies
-www/dist
-www/node_modules/*
-
-# also ignore the main dependencies
-node_modules/*
+# ignore dist
+/bin/pixel-status
+/src/www/dist

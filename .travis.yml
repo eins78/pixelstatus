@@ -11,12 +11,11 @@ addons:
     - freeglut3-dev
 
 before_script:
-  - cd www && npm i && npm -s build && cd ..
+  - npm prune
   - git submodule update --init --recursive && npm run -s build-opc && npm run opc-dummy & sleep 15
+  # - cd www && npm i && npm -s build && cd .. # not tested atm
 before_install:
   - npm i -g npm@^2.0.0
-before_script:
-  - npm prune
 after_success:
   - npm -s run semantic-release
 branches:

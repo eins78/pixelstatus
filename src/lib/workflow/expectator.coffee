@@ -22,10 +22,10 @@ module.exports = expectResultWithRuler = (res, callback)->
       result= checkExpectation(actual, expected, comparator)
 
       if result is true
-        log.debug "OK: '#{item}' #{comparator} #{expected}:", result
+        log.silly "OK: '#{item}' #{comparator} #{expected}:", result
       else
         log.verbose "NOT OK: '#{item}' #{comparator} #{expected}:", result
-        log.debug "'#{item}' actual:", actual
+        log.silly "'#{item}' actual:", actual
       # comparison is a bool and the result of this module
       # - it's not an error in control-flow sense – don't exit async!
       nextExpectation(null, result)
@@ -37,7 +37,7 @@ module.exports = expectResultWithRuler = (res, callback)->
 
 
 checkExpectation= (actual, expected, comparator)->
-  log.debug('checkExpectation', actual, expected, comparator)
+  log.silly('checkExpectation', actual, expected, comparator)
   # NOTE: this looks weird, but since we are using a library made for testing,
   #       an 'undefined' result means true, and a throw means false!
   # TODO: comparator validation (on task level)
@@ -48,5 +48,5 @@ checkExpectation= (actual, expected, comparator)->
   catch error
      # re-raise if unexpected error:
     throw error if not (error instanceof expect.AssertionError)
-    log.debug error.message
+    log.silly error.message
     false

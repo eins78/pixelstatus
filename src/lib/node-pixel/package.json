@@ -1,0 +1,6 @@
+{
+  "name": "pixel",
+  "version": "1.0.0",
+  "description": "controlls (hardware) LED pixels via OpenPixelControl",
+  "main": "pixelController.coffee"
+}

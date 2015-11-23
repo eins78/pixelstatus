@@ -33,7 +33,7 @@ sections:
 
   - id: top_right_box
     description: "Is there nobody alone in space?"
-    length: 60
+    length: 64
     request: http://www.howmanypeopleareinspacerightnow.com/peopleinspace.json
     ok: lightblue
     fail: rebeccapurple
