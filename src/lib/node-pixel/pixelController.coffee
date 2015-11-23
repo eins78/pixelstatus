@@ -80,7 +80,7 @@ class PixelControl
     # ## private methods
     @putPixel=(section, number, color)=>
       rgb = parseColor(color)
-      log.debug 'pixel: put', section, number, color, rgb
+      log.silly 'pixel: put', section, number, color, rgb
 
       section = @pixelSections[section]?.pixels
       unless rgb? and section?
@@ -121,7 +121,7 @@ class PixelControl
 
   # usage: `pixel.setAllSections('red')`
   setAllSections: (color, write = true, callback)=>
-    log.debug 'setAll', color, @pixelSections.length
+    log.silly 'setAll', color, @pixelSections.length
     f.forOwn @pixelSections, (section, id)=>
       f.times(section.length).map (number)=> @putPixel(id, number, color)
     do @writeBuffer if write

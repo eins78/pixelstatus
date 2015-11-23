@@ -6,7 +6,7 @@ taskRunner= (callback) ->
   task= this
   return callback 'no task!' unless task?
   log.info "#{task.id}: running. type='#{task.check.type}'"
-  log.debug "#{task.id}: details", task
+  log.silly "#{task.id}: details", task
 
   runByType[task.check.type] task.check, (err, res)->
     if err?
