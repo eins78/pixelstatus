@@ -1,7 +1,7 @@
 {
   "name": "@eins78/pixelstatus",
   "description": "openpixelcontrol client for status displays",
-  "main": "app.js",
+  "main": "src/app.coffee",
   "scripts": {
     "test": "npm run -s build && npm -s run dev -- examples/oneshot.yaml",
     "start": "npm run -s build && ./bin/pixel-status",

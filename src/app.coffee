@@ -1,5 +1,3 @@
-#!/usr/bin/env coffee
-
 async= require('async')
 f= require('lodash')
 
