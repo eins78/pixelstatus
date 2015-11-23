@@ -10,6 +10,7 @@ config= f.defaults require('./lib/readConfig'),
   wait:  3    # seconds to wait between checks
 
 # lib
+PixelController= require('./lib/node-pixel/pixelController')
 u= require('./lib/util')
 log= require('./lib/logger')
 buildTask= require('./lib/buildTask')
@@ -30,7 +31,6 @@ Reactor= require('./lib/workflow/reactor')
 pixelSections = f(config.sections).map((section)->
   [section?.id, { length: section?.length }])
   .zipObject().value() # e.g. `{ foo: { length: 1 }, bar: { length: 1 } }`
-PixelController= require('pixel')
 pixels = PixelController(f.merge({}, config, { sections: pixelSections }))
 
 # init hardware, start worker and webserver (ui and api)

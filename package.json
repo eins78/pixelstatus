@@ -35,9 +35,6 @@
     "url": "https://github.com/eins78/pixelstatus/issues"
   },
   "homepage": "https://github.com/eins78/pixelstatus",
-  "bundledDependencies": [
-    "pixel"
-  ],
   "dependencies": {
     "async": "^0.9.0",
     "boom": "^2.8.0",
@@ -56,7 +53,6 @@
     "lodash": "^3.9.3",
     "must": "0.13.1",
     "opc": "^1.1.2",
-    "pixel": "./lib/node-pixel",
     "request": "^2.55.0",
     "utile": "^0.3.0",
     "winston": "^1.0.0"

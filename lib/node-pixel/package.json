@@ -1,15 +1,6 @@
 {
   "name": "pixel",
   "version": "1.0.0",
-  "description": "led pixel controller",
-  "main": "pixelController.coffee",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "color": "^0.10.1",
-    "winston": "^1.0.0"
-  }
+  "description": "controlls (hardware) LED pixels via OpenPixelControl",
+  "main": "pixelController.coffee"
 }

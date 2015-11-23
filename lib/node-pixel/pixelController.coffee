@@ -5,7 +5,7 @@ f = require('lodash')
 u = require('utile')
 assert = require('assert')
 
-log = require('./logger')
+log = require('../logger')
 parseColor = require('./parseColor')
 
 # consts
