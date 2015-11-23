@@ -4,4 +4,5 @@ npm-debug.log
 dev
 
 # ignore dist
-dist
+/bin/pixel-status
+/src/www/dist

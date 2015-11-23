@@ -1,12 +1,12 @@
 {
   "name": "@eins78/pixelstatus",
   "description": "openpixelcontrol client for status displays",
-  "main": "src/app.coffee",
+  "bin": { "pixel-status": "bin/pixel-status" },
   "scripts": {
     "test": "npm run -s build && npm -s run dev -- examples/oneshot.yaml",
     "start": "npm run -s build && ./bin/pixel-status",
     "dev": "./bin/pixel-status",
-    "build": "echo '#!/usr/bin/env node' > bin/pixel-status && browserify --node -t coffeeify --extension='.coffee' app.coffee >> bin/pixel-status && chmod +x bin/pixel-status",
+    "build": "echo '#!/usr/bin/env node' > bin/pixel-status && browserify --node -g uglifyify -t coffeeify --extension='.coffee' src/app.coffee >> bin/pixel-status && chmod +x bin/pixel-status",
     "demo": "npm run -s simulator & sleep 3 && npm start -- examples/demo.yaml",
     "git": "git submodule update --init",
     "fadecandy-server": "bin/fadecandy-server",
@@ -55,6 +55,7 @@
   "devDependencies": {
     "browserify": "^10.2.6",
     "coffeeify": "^1.2.0",
-    "semantic-release": "^4.3.5"
+    "semantic-release": "^4.3.5",
+    "uglifyify": "^3.0.1"
   }
 }
