@@ -2,8 +2,5 @@
 *.coffee
 # but do publish the coffee examples
 !examples/*.js
-# and node_modules/lib symlink trick (lets see if that works)
-node_modules/*
-!node_modules/lib
 # also ignore other stuff we .gitignore
 dev

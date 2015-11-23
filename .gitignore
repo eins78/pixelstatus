@@ -14,7 +14,3 @@ www/node_modules/*
 
 # also ignore the main dependencies
 node_modules/*
-# but not the wip, in-repo 'pixel' module
-!node_modules/pixel
-# but do ignore the 'pixel' module's dependencies
-node_modules/pixel/node_modules/*
