@@ -1,4 +1,10 @@
-# ignore coffee in npm, only compiled js gets published
-*.coffee
-# also ignore other stuff we .gitignore
+# ignore stuff that should not be in published package:
+src
 dev
+test
+vendor
+Makefile
+.travis.yml
+.gitignore
+.gitmodules
+.DS-Store
