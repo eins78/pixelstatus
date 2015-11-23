@@ -3,14 +3,16 @@
   "description": "openpixelcontrol client for status displays",
   "main": "app.coffee",
   "scripts": {
-    "test": "echo \"Just checking the build\" && npm run -s build",
+    "test": "npm run -s build && npm -s run dev -- examples/oneshot.yaml",
     "start": "npm run -s build && ./bin/pixel-status",
     "dev": "./bin/pixel-status",
     "build": "npm run -s git && cd www && npm i && npm run -s build && cd ..",
     "demo": "npm run -s simulator & sleep 3 && npm start -- examples/demo.yaml",
     "git": "git submodule update --init",
-    "simulator": "cd vendor/openpixelcontrol && make && bin/gl_server ../../examples/simulator-layouts/4-box-layout.json",
     "fadecandy-server": "bin/fadecandy-server",
+    "build-opc": "cd vendor/openpixelcontrol && make && cd ../..",
+    "simulator": "./vendor/openpixelcontrol/bin/gl_server examples/simulator-layouts/4-box-layout.json",
+    "opc-dummy": "./vendor/openpixelcontrol/bin/dummy_server",
     "pixeltest": "coffee ./pixeltest.coffee",
     "check-deps": "coffee -e 'console.log(require(\"check-dependencies\")?.sync()?.error?.join?(\"\\n\"))'",
     "prepublish": "npm run -s build",
@@ -33,6 +35,9 @@
     "url": "https://github.com/eins78/pixelstatus/issues"
   },
   "homepage": "https://github.com/eins78/pixelstatus",
+  "bundledDependencies": [
+    "pixel"
+  ],
   "dependencies": {
     "async": "^0.9.0",
     "boom": "^2.8.0",
@@ -51,6 +56,7 @@
     "lodash": "^3.9.3",
     "must": "0.13.1",
     "opc": "^1.1.2",
+    "pixel": "./lib/node-pixel",
     "request": "^2.55.0",
     "utile": "^0.3.0",
     "winston": "^1.0.0"

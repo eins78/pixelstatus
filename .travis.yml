@@ -2,12 +2,21 @@ sudo: false
 language: node_js
 node_js:
   - '4'
+
+# for opc simulator:
+addons:
+  apt:
+    packages:
+    - mesa-common-dev
+    - freeglut3-dev
+
 before_script:
-  - git submodule update --init --recursive && cd www && npm i && npm build && cd ..
+  - cd www && npm i && npm -s build && cd ..
+  - git submodule update --init --recursive && npm run -s build-opc && npm run opc-dummy & sleep 15
 before_install:
   - npm i -g npm@^2.0.0
-before_script:
-  - npm prune
+# before_script:
+#   - npm prune
 after_success:
   - npm -s run semantic-release
 branches:

@@ -1,0 +1,10 @@
+---
+# run it just once:
+loop: false
+sections:
+  - id: posix_true
+    length: 1
+    command: 'true'
+    expect: { status: { is: 0 } }
+    ok: green
+    fail: red
