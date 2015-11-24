@@ -1,7 +1,9 @@
 {
   "name": "@eins78/pixelstatus",
   "description": "openpixelcontrol client for status displays",
-  "bin": { "pixel-status": "bin/pixel-status" },
+  "bin": {
+    "pixel-status": "bin/pixel-status"
+  },
   "scripts": {
     "test": "npm run -s build && npm -s run dev -- examples/oneshot.yaml",
     "start": "npm run -s build && ./bin/pixel-status",
@@ -42,14 +44,14 @@
     "color": "^0.10.1",
     "hapi": "^8.8.0",
     "hertz": "^1.1.1",
-    "is-integer": "^1.0.4",
+    "is-integer": "^1.0.6",
     "joi": "^6.6.1",
-    "js-yaml": "^3.3.1",
+    "js-yaml": "^3.4.5",
     "lodash": "^3.9.3",
     "must": "0.13.1",
     "npmlog": "^2.0.0",
     "opc": "^1.1.2",
-    "request": "^2.55.0",
+    "request": "^2.67.0",
     "utile": "^0.3.0"
   },
   "devDependencies": {
