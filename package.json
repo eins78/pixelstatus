@@ -1,7 +1,9 @@
 {
   "name": "@eins78/pixelstatus",
   "description": "openpixelcontrol client for status displays",
-  "bin": { "pixel-status": "bin/pixel-status" },
+  "bin": {
+    "pixel-status": "bin/pixel-status"
+  },
   "scripts": {
     "test": "npm run -s build && npm -s run dev -- examples/oneshot.yaml",
     "start": "npm run -s build && ./bin/pixel-status",
@@ -54,7 +56,7 @@
   },
   "devDependencies": {
     "browserify": "^10.2.6",
-    "coffeeify": "^1.2.0",
+    "coffeeify": "^2.0.1",
     "semantic-release": "^4.3.5",
     "uglifyify": "^3.0.1"
   }
