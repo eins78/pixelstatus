@@ -2,13 +2,17 @@ sudo: false
 language: node_js
 node_js:
   - '4'
-
-# for opc simulator:
+env:
+  - CXX=g++-4.8
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
-    - mesa-common-dev
-    - freeglut3-dev
+      - g++-4.8
+      # for opc simulator:
+      - mesa-common-dev
+      - freeglut3-dev
 
 before_script:
   - npm prune
