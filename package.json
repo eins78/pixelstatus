@@ -8,7 +8,7 @@
     "test": "npm run -s build && npm -s run dev -- examples/oneshot.yaml",
     "start": "npm run -s build && ./bin/pixel-status",
     "dev": "./bin/pixel-status",
-    "build": "echo '#!/usr/bin/env node' > bin/pixel-status && browserify --node -g uglifyify -t coffeeify --extension='.coffee' src/app.coffee >> bin/pixel-status && chmod +x bin/pixel-status",
+    "build": "echo '#!/usr/bin/env node' > bin/pixel-status && browserify --node --extension='.coffee' -t [ coffeeify ] -t uglifyify src/app.coffee >> bin/pixel-status && chmod +x bin/pixel-status",
     "demo": "npm run -s simulator & sleep 3 && npm start -- examples/demo.yaml",
     "git": "git submodule update --init",
     "fadecandy-server": "bin/fadecandy-server",
@@ -54,8 +54,8 @@
     "utile": "^0.3.0"
   },
   "devDependencies": {
-    "browserify": "^10.2.6",
-    "coffeeify": "^1.2.0",
+    "browserify": "^12.0.1",
+    "coffeeify": "^2.0.1",
     "semantic-release": "^4.3.5",
     "uglifyify": "^3.0.1"
   }
