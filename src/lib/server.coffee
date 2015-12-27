@@ -1,4 +1,5 @@
 Hapi= require('hapi')
+Inert= require('inert')
 Joi= require('joi')
 Boom = require('boom')
 
@@ -6,10 +7,12 @@ f= require('lodash')
 Color= require('color')
 
 module.exports= (config, pixelController)->
-  server = new Hapi.Server({
+  server= new Hapi.Server({
     connections:
       routes: { cors: true }
   })
+
+  server.register(Inert, ()->) # static file server for UI
 
   server.connection
     host: 'localhost'
