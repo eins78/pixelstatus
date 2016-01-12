@@ -54,7 +54,7 @@
     "utile": "^0.3.0"
   },
   "devDependencies": {
-    "browserify": "^12.0.1",
+    "browserify": "^13.0.0",
     "coffeeify": "^2.0.1",
     "semantic-release": "^4.3.5",
     "uglifyify": "^3.0.1"
